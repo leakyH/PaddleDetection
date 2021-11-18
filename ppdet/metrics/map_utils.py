@@ -18,12 +18,14 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import os
+import re
 import sys
 import numpy as np
 import itertools
 import paddle
 from ppdet.modeling.bbox_utils import poly2rbox, rbox2poly_np
-
+from matplotlib import rcParams
+rcParams['font.sans-serif']='Noto Sans CJK JP'
 from ppdet.utils.logger import setup_logger
 logger = setup_logger(__name__)
 
@@ -61,7 +63,57 @@ def draw_pr_curve(precision,
     plt.plot(recall, precision)
     plt.savefig(output_path)
 
+def draw_class_pr_curve(precision,
+                  recall,
+                  iou=0.5,
+                  out_dir='pr_curve',
+                  classname='',
+                  file_name='precision_recall_curve.jpg'):
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
+    output_path = os.path.join(out_dir, file_name)
+    try:
+        import matplotlib.pyplot as plt
+    except Exception as e:
+        logger.error('Matplotlib not found, plaese install matplotlib.'
+                     'for example: `pip install matplotlib`.')
+        raise e
+    plt.cla()
+    plt.figure('P-R Curve')
+    plt.title('{}:Precision/Recall Curve(IoU={})'.format(classname,iou))
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.grid(True)
+    plt.plot(recall, precision)
+    plt.savefig(output_path)
 
+def draw_multiple_pr_curve(precision,
+                  recall,
+                  classname,
+                  iou=0.5,
+                  out_dir='pr_curve',
+                  file_name='precision_recall_curve.jpg',exmessage=''):
+    if exmessage!='':
+        exmessage=exmessage+"_"
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
+    output_path = os.path.join(out_dir, exmessage+file_name)
+    try:
+        import matplotlib.pyplot as plt
+    except Exception as e:
+        logger.error('Matplotlib not found, plaese install matplotlib.'
+                     'for example: `pip install matplotlib`.')
+        raise e
+    plt.cla()
+    plt.figure('P-R Curve')
+    plt.title('{}Precision/Recall Curve(IoU={})'.format(exmessage,iou))
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.grid(True)
+    for p,r,c in zip(precision,recall,classname):
+        plt.plot(r, p,label=c)
+    plt.legend()
+    plt.savefig(output_path)
 def bbox_area(bbox, is_bbox_normalized):
     """
     Calculate area of a bounding box

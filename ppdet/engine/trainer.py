@@ -49,8 +49,8 @@ __all__ = ['Trainer']
 
 MOT_ARCH = ['DeepSORT', 'JDE', 'FairMOT']
 
-
 class Trainer(object):
+    #@profile
     def __init__(self, cfg, mode='train'):
         self.cfg = cfg
         assert mode.lower() in ['train', 'eval', 'test'], \
@@ -171,7 +171,6 @@ class Trainer(object):
             self._metrics = [
                 COCOMetric(
                     anno_file=anno_file,
-                    clsid2catid=clsid2catid,
                     classwise=classwise,
                     output_eval=output_eval,
                     bias=bias,
@@ -290,7 +289,8 @@ class Trainer(object):
         else:
             self.start_epoch = load_weight(self.model, weights, self.optimizer)
         logger.debug("Resume weights of epoch {}".format(self.start_epoch))
-
+    
+    #@profile
     def train(self, validate=False):
         assert self.mode == 'train', "Model not in 'train' mode"
         Init_mark = False

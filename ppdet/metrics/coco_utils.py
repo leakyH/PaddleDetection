@@ -22,7 +22,7 @@ import numpy as np
 import itertools
 
 from ppdet.metrics.json_results import get_det_res, get_det_poly_res, get_seg_res, get_solov2_segm_res, get_keypoint_res
-from ppdet.metrics.map_utils import draw_pr_curve
+from ppdet.metrics.map_utils import draw_class_pr_curve,draw_multiple_pr_curve
 
 from ppdet.utils.logger import setup_logger
 logger = setup_logger(__name__)
@@ -126,6 +126,9 @@ def cocoapi_eval(jsonfile,
         # precision: (iou, recall, cls, area range, max dets)
         assert len(cat_ids) == precisions.shape[2]
         results_per_category = []
+        _precision=[]
+        _recall=[]
+        _names=[]
         for idx, catId in enumerate(cat_ids):
             # area range index 0: all area ranges
             # max dets index -1: typically 100 per image
@@ -140,11 +143,16 @@ def cocoapi_eval(jsonfile,
                 (str(nm["name"]), '{:0.3f}'.format(float(ap))))
             pr_array = precisions[0, :, idx, 0, 2]
             recall_array = np.arange(0.0, 1.01, 0.01)
-            draw_pr_curve(
+            draw_class_pr_curve(
                 pr_array,
                 recall_array,
                 out_dir=style + '_pr_curve',
+                classname=nm["name"],
                 file_name='{}_precision_recall_curve.jpg'.format(nm["name"]))
+            _precision.append(pr_array)
+            _recall.append(recall_array)
+            _names.append(nm["name"])
+        draw_multiple_pr_curve(_precision,_recall,_names,out_dir=style + '_pr_curve',file_name='precision_recall_curve.jpg',exmessage='')
 
         num_columns = min(6, len(results_per_category) * 2)
         results_flatten = list(itertools.chain(*results_per_category))

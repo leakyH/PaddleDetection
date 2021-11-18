@@ -207,6 +207,7 @@ def create(cls_or_name, **kwargs):
 
     Returns: instance of type `cls_or_name`
     """
+    # print(global_config)
     assert type(cls_or_name) in [type, str
                                  ], "should be a class or name of a class"
     name = type(cls_or_name) == str and cls_or_name or cls_or_name.__name__

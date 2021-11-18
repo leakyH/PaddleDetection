@@ -1,0 +1,10 @@
+_BASE_: [
+  '../datasets/certificate.yml',
+  '../runtime.yml',
+  './_base_/ppyolov2_r50vd_dcn.yml',
+  './_base_/optimizer_365e.yml',
+  './_base_/ppyolov2_reader.yml',
+]
+
+#snapshot_epoch: 8
+weights: output/ppyolo_tiny_365e_certificate/model_final

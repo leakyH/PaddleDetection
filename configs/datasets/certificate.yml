@@ -1,0 +1,21 @@
+metric: COCO
+num_classes: 34
+
+TrainDataset:
+  !COCODataSet
+    image_dir: train
+    anno_path: annotations/instance_train.json
+    dataset_dir: certificates/aug/cocotype/
+    data_fields: ['image', 'gt_bbox', 'gt_class']
+
+EvalDataset:
+  !COCODataSet
+    image_dir: val
+    anno_path: annotations/instance_val.json
+    dataset_dir: certificates/aug/cocotype/
+
+TestDataset:
+  !ImageFolder
+    image_dir: test
+    anno_path: annotations/instances_test.json
+    dataset_dir: certificates/aug/cocotype/

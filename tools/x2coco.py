@@ -25,6 +25,7 @@ from tqdm import tqdm
 
 import numpy as np
 import PIL.ImageDraw
+import random
 
 label_to_num = {}
 categories_list = []
@@ -52,6 +53,7 @@ def images_labelme(data, num):
         image['file_name'] = data['imagePath'].split('\\')[-1]
     else:
         image['file_name'] = data['imagePath'].split('/')[-1]
+        #print(data['imagePath'])
     return image
 
 
@@ -276,7 +278,7 @@ def voc_xmls_to_cocojson(annotation_paths, label2id, output_dir, output_file):
         output_json_dict['categories'].append(category_info)
     output_file = os.path.join(output_dir, output_file)
     with open(output_file, 'w') as f:
-        output_json = json.dumps(output_json_dict)
+        output_json = json.dumps(output_json_dict,ensure_ascii=False)
         f.write(output_json)
 
 
@@ -387,7 +389,9 @@ def main():
             if args.test_proportion != 0.0 and not os.path.exists(test_out_dir):
                 os.makedirs(test_out_dir)
         count = 1
-        for img_name in os.listdir(args.image_input_dir):
+        input_image_dir=os.listdir(args.image_input_dir)
+        random.shuffle(input_image_dir)
+        for img_name in input_image_dir:
             if count <= train_num:
                 if osp.exists(args.output_dir + '/train/'):
                     shutil.copyfile(
@@ -419,7 +423,7 @@ def main():
                 train_data_coco,
                 open(train_json_path, 'w'),
                 indent=4,
-                cls=MyEncoder)
+                cls=MyEncoder,ensure_ascii=False)
         if args.val_proportion != 0:
             val_data_coco = deal_json(args.dataset_type,
                                       args.output_dir + '/val',
@@ -430,7 +434,7 @@ def main():
                 val_data_coco,
                 open(val_json_path, 'w'),
                 indent=4,
-                cls=MyEncoder)
+                cls=MyEncoder,ensure_ascii=False)
         if args.test_proportion != 0:
             test_data_coco = deal_json(args.dataset_type,
                                        args.output_dir + '/test',
@@ -441,7 +445,7 @@ def main():
                 test_data_coco,
                 open(test_json_path, 'w'),
                 indent=4,
-                cls=MyEncoder)
+                cls=MyEncoder,ensure_ascii=False)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,10 @@
+_BASE_: [
+  '../datasets/ematerials.yml',
+  '../runtime.yml',
+  './_base_/ppyolo_tiny.yml',
+  './_base_/optimizer_profiler.yml',
+  './_base_/ppyolo_tiny_reader.yml',
+]
+
+#snapshot_epoch: 8
+weights: output/ppyolo_tiny_ematerials/model_final

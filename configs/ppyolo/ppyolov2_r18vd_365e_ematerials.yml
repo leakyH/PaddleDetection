@@ -1,0 +1,10 @@
+_BASE_: [
+  '../datasets/ematerials.yml',
+  '../runtime.yml',
+  './_base_/ppyolov2_r18vd_dcn.yml',
+  './_base_/optimizer_365e.yml',
+  './_base_/ppyolov2_reader.yml',
+]
+
+#snapshot_epoch: 8
+weights: output/clip/ppyolov2_r18vd_365e_ematerials/model_final

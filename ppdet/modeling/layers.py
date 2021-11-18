@@ -268,6 +268,7 @@ class DropBlock(nn.Layer):
         self.data_format = data_format
 
     def forward(self, x):
+        #print(x.dtype) #will be fp16 in 2.1.2, fp32 in 2.1.0 ,if set --fp16
         if not self.training or self.keep_prob == 1:
             return x
         else:
@@ -279,7 +280,7 @@ class DropBlock(nn.Layer):
             for s in shape:
                 gamma *= s / (s - self.block_size + 1)
 
-            matrix = paddle.cast(paddle.rand(x.shape, x.dtype) < gamma, x.dtype)
+            matrix = paddle.cast(paddle.rand(x.shape, "float32") < gamma, x.dtype)
             mask_inv = F.max_pool2d(
                 matrix,
                 self.block_size,

@@ -26,7 +26,7 @@ sys.path.insert(0, parent_path)
 # ignore warning log
 import warnings
 warnings.filterwarnings('ignore')
-
+from line_profiler import LineProfiler
 import paddle
 
 from ppdet.core.workspace import load_config, merge_config
@@ -69,7 +69,7 @@ def parse_args():
     parser.add_argument(
         "--use_vdl",
         type=bool,
-        default=False,
+        default=True,
         help="whether to record the data to VisualDL.")
     parser.add_argument(
         '--vdl_log_dir',
@@ -86,6 +86,7 @@ def parse_args():
 
 
 def run(FLAGS, cfg):
+    print(cfg)
     # init fleet environment
     if cfg.fleet:
         init_fleet_env(cfg.get('find_unused_parameters', False))
