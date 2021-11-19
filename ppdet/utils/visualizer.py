@@ -18,13 +18,14 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw,ImageFont
 import cv2
 import math
 
 from .colormap import colormap
 from ppdet.utils.logger import setup_logger
 logger = setup_logger(__name__)
+FONT=ImageFont.truetype(font='./SimHei.ttf',encoding='utf-8',size=100)
 
 __all__ = ['visualize_results']
 
@@ -121,10 +122,10 @@ def draw_bbox(image, im_id, catid2name, bboxes, threshold):
 
         # draw label
         text = "{} {:.2f}".format(catid2name[catid], score)
-        tw, th = draw.textsize(text)
+        tw, th = draw.textsize(text,font=FONT)
         draw.rectangle(
             [(xmin + 1, ymin - th), (xmin + tw + 1, ymin)], fill=color)
-        draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
+        draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255),font=FONT)
 
     return image
 
