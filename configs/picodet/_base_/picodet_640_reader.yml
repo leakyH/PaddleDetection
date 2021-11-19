@@ -3,7 +3,7 @@ TrainReader:
   sample_transforms:
   - Decode: {}
   - RandomCrop: {}
-  - RandomFlip: {prob: 0.5}
+  - RandomFlip: {}
   - RandomDistort: {}
   batch_transforms:
   - BatchRandomResize: {target_size: [576, 608, 640, 672, 704], random_size: True, random_interp: True, keep_ratio: False}

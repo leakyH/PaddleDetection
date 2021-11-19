@@ -1,18 +1,18 @@
 _BASE_: [
-  '../datasets/coco_detection.yml',
+  '../datasets/ematerials.yml',
   '../runtime.yml',
   '_base_/picodet_esnet.yml',
   '_base_/optimizer_300e.yml',
-  '_base_/picodet_640_reader.yml',
+  '_base_/picodet_416_reader.yml',
 ]
 
 pretrain_weights: https://paddledet.bj.bcebos.com/models/pretrained/ESNet_x1_25_pretrained.pdparams
-weights: output/picodet_l_640_coco/model_final
+weights: output/picodet_l_416_coco/model_final
 find_unused_parameters: True
 use_ema: true
 cycle_epoch: 40
 snapshot_epoch: 10
-epoch: 250
+epoch: 300
 
 ESNet:
   scale: 1.25
@@ -35,7 +35,7 @@ PicoHead:
   feat_in_chan: 160
 
 TrainReader:
-  batch_size: 32
+  batch_size: 56
 
 LearningRate:
   base_lr: 0.3

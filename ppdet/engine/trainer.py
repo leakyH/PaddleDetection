@@ -186,7 +186,7 @@ class Trainer(object):
                 self._metrics = [
                     COCOMetric(
                         anno_file=anno_file,
-                        clsid2catid=clsid2catid,
+                        clsid2catid=None,
                         classwise=classwise,
                         output_eval=output_eval,
                         bias=bias,
