@@ -90,8 +90,6 @@ class COCOMetric(Metric):
         self.iou_type = kwargs.get('IouType', 'bbox')
         self.confusion_matrix=ConfusionMatrix(nc=len(self.clsid2catid))
         self.reset()
-
-        self.confusion_matrix=ConfusionMatrix(nc=len(self.clsid2catid))
     def reset(self):
         # only bbox and mask evaluation support currently
         self.results = {'bbox': [], 'mask': [], 'segm': [], 'keypoint': []}
