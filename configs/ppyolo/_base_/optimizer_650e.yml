@@ -1,11 +1,12 @@
 epoch: 650
 
 LearningRate:
-  base_lr: 0.005
+  base_lr: 0.0005
   schedulers:
   - !PiecewiseDecay
     gamma: 0.1
     milestones:
+    - 250
     - 430
     - 540
     - 610

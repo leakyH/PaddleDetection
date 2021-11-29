@@ -78,7 +78,7 @@ def draw_class_pr_curve(precision,
                      'for example: `pip install matplotlib`.')
         raise e
     plt.cla()
-    plt.figure('P-R Curve')
+    plt.figure('P-R Curve',figsize=[10,10],dpi=300)
     plt.title('{}:Precision/Recall Curve(IoU={})'.format(classname,iou))
     plt.xlabel('Recall')
     plt.ylabel('Precision')

@@ -229,6 +229,7 @@ class COCOMetric(Metric):
         for result in self.results['bbox']:
             img2pred[result['image_id']].append(np.array(minxywh2xywh(result['bbox'])+[result['score'],result['category_id']-1]))
         for img in imgids:
+            # print(img,np.array(img2pred[img]).shape,np.array(img2gt[img]).shape)
             self.confusion_matrix.process_batch(np.array(img2pred[img]),np.array(img2gt[img]))
         self.confusion_matrix.plot(normalize=False,names=[self.catid2name[self.clsid2catid[i]] for i in range(len(self.clsid2catid))])
         return self.confusion_matrix.matrix
@@ -473,6 +474,8 @@ class ConfusionMatrix:
             None, updates confusion matrix accordingly
         """
         # print(type(detections),type(labels))
+        detections=detections.reshape(-1,6)
+        labels=labels.reshape(-1,5)#适配detections和labels为空的情况
         detections = detections[detections[:, 4] > self.conf]
         gt_classes = np.array([int(l) for l in labels[:,0]])#labels[:, 0].int()
         detection_classes = np.array([int(l) for l in detections[:, 5]])#detections[:, 5].int()
