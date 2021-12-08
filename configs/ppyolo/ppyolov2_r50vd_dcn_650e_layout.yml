@@ -1,0 +1,19 @@
+_BASE_: [
+  '../datasets/format.yml',
+  '../runtime.yml',
+  './_base_/ppyolov2_r50vd_dcn.yml',
+  './_base_/optimizer_650e.yml',
+  './_base_/ppyolov2_reader_format.yml',
+]
+
+snapshot_epoch: 10
+weights: output/ppyolov2_r50vd_dcn_650e_layout/model_final
+
+YOLOv3Head:
+  anchors: [[13, 9], [48,13], [101,13],
+            [72,26], [230,21], [144,41],
+            [79,77], [310,60], [202,104]]
+  anchor_masks: [[6, 7, 8], [3, 4, 5], [0, 1, 2]]
+  loss: YOLOv3Loss
+  iou_aware: true
+  iou_aware_factor: 0.5
