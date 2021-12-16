@@ -1,0 +1,20 @@
+metric: COCO
+num_classes: 13
+
+TrainDataset:
+  !COCODataSet
+    image_dir: train
+    anno_path: annotations/instance_train.json
+    dataset_dir: layoutDetection/paddlev2/paddle
+    data_fields: ['image', 'gt_bbox', 'gt_class']
+
+TestDataset:
+  !ImageFolder
+    image_dir: test
+    anno_path: annotations/instance_test.json
+    dataset_dir: layoutDetection/paddlev2/paddle
+EvalDataset:
+  !COCODataSet
+    image_dir: test
+    anno_path: annotations/instance_test.json
+    dataset_dir: layoutDetection/paddlev2/paddle

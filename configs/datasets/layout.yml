@@ -1,0 +1,20 @@
+metric: COCO
+num_classes: 19
+
+TrainDataset:
+  !COCODataSet
+    image_dir: train
+    anno_path: annotations/instance_train.json
+    dataset_dir: formatDetection/paddletype/
+    data_fields: ['image', 'gt_bbox', 'gt_class']
+
+TestDataset:
+  !ImageFolder
+    image_dir: test
+    anno_path: annotations/instance_test.json
+    dataset_dir: formatDetection/paddletype/
+EvalDataset:
+  !COCODataSet
+    image_dir: test
+    anno_path: annotations/instance_test.json
+    dataset_dir: formatDetection/paddletype/

@@ -1,0 +1,12 @@
+_BASE_: [
+  '../datasets/layoutv2.yml',
+  '../runtime.yml',
+  './_base_/ppyolov2_r50vd_dcn.yml',
+  './_base_/optimizer_650e.yml',
+  './_base_/ppyolov2_reader_layout.yml',
+]
+
+snapshot_epoch: 10
+weights: output/ppyolov2_r50vd_dcn_650e_layoutv3/model_final
+
+
