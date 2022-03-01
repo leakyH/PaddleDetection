@@ -1,5 +1,5 @@
 _BASE_: [
-  '../datasets/layoutv2.yml',
+  '../datasets/layoutv3.yml',
   '../runtime.yml',
   './_base_/ppyolov2_r50vd_dcn.yml',
   './_base_/optimizer_650e.yml',
