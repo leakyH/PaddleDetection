@@ -1,3 +1,5 @@
+English | [简体中文](README_cn.md)
+
 # Real time Multi-Object Tracking system PP-Tracking
 
 PP-Tracking is the first open source real-time Multi-Object Tracking system, and it is based on PaddlePaddle deep learning framework. It has rich models, wide application and high efficiency deployment.
@@ -29,6 +31,7 @@ PP-Tracking supports C++ predict and deployment. Please refer to this [doc](cpp/
 ### GUI predict and deployment
 PP-Tracking supports GUI predict and deployment. Please refer to this [doc](https://github.com/yangyudong2020/PP-Tracking_GUi).
 
+（thanks@[yangyudong2020](https://github.com/yangyudong2020)、@[hchhtc123](https://github.com/hchhtc123) for the contribution to PaddleDetetcion.）
 
 ## 二、Model Zoo
 
@@ -58,8 +61,8 @@ PP-Tracking provids multi-scenario pre-training models and the exported models f
 ```
 @ARTICLE{9573394,
   author={Zhu, Pengfei and Wen, Longyin and Du, Dawei and Bian, Xiao and Fan, Heng and Hu, Qinghua and Ling, Haibin},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
-  title={Detection and Tracking Meet Drones Challenge}, 
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  title={Detection and Tracking Meet Drones Challenge},
   year={2021},
   volume={},
   number={},
