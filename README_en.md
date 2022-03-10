@@ -205,7 +205,7 @@ The relationship between COCO mAP and FPS on Tesla V100 of representative models
 
   - `PP-YOLO v2` is optimized version of `PP-YOLO` which has mAP of 49.5% and 68.9FPS on Tesla V100
 
-  - All these models can be get in [Model Zoo](#ModelZoo)
+  - All these models can be get in [Model Zoo](#model-zoo)
 
 The relationship between COCO mAP and FPS on Qualcomm Snapdragon 865 of representative mobile side models.
 
@@ -266,7 +266,7 @@ The relationship between COCO mAP and FPS on Qualcomm Snapdragon 865 of represen
   - [SOLOv2](configs/solov2/README.md)
 - Rotation object detection
   - [S2ANet](configs/dota/README_en.md)
-- [Keypoint detection](configs/keypoint)
+- [Keypoint detection](configs/keypoint/README_en.md)
   - [PP-TinyPose](configs/keypoint/tiny_pose)
   - HigherHRNet
   - HRNet
